@@ -1,0 +1,10 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/wordpress-posts"
+  to = "/.netlify/functions/wordpress-posts"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
