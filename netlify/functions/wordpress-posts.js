@@ -2,10 +2,22 @@ const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   try {
-    // Récupérer les articles de WordPress
-    const response = await fetch('https://www.parking-actus.com/wp-json/wp/v2/posts?_embed=true&per_page=10');
+    console.log('Tentative de récupération des articles WordPress');
+    
+    // Vérifier l'accessibilité publique de l'API
+    const response = await fetch('https://www.parking-actus.com/wp-json/wp/v2/posts?_embed=true&per_page=10', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    console.log('Statut de la réponse:', response.status);
+    console.log('En-têtes de la réponse:', Object.fromEntries(response.headers));
     
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Contenu de l\'erreur:', errorText);
       throw new Error(`API WordPress a répondu avec: ${response.status}`);
     }
     
@@ -38,6 +50,7 @@ exports.handler = async function(event, context) {
       })
     };
   } catch (error) {
+    console.error('Erreur lors de la récupération des articles:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({
