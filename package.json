@@ -1,0 +1,12 @@
+{
+  "name": "wordpress-parking-actus-fetcher",
+  "version": "1.0.0",
+  "description": "Netlify function to fetch WordPress posts from Parking Actus",
+  "main": "netlify/functions/wordpress-posts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
