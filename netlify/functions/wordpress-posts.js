@@ -8,7 +8,9 @@ exports.handler = async function(event, context) {
     const response = await fetch('https://www.parking-actus.com/wp-json/wp/v2/posts?_embed=true&per_page=10', {
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'User-Agent': 'Netlify Function / WordPress Posts Fetcher',
+        'Referer': 'https://golden-gecko-c240a4.netlify.app'
       }
     });
     
